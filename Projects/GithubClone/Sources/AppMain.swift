@@ -1,15 +1,28 @@
 import SwiftUI
+import LinkNavigator
+import Architecture
 
-@main
-struct AppMain: App {
-  var body: some Scene {
-    WindowGroup {
-      VStack {
-        Spacer()
-        Text("AppMain")
-          .foregroundStyle(Color.blue)
-        Spacer()
-      }
-    }
+struct AppMain {
+  let viewModel: AppViewModel
+}
+
+extension AppMain: View {
+  var body: some View {
+    TabLinkNavigationView(
+      linkNavigator: viewModel.linkNavigator,
+      isHiddenDefaultTabbar: false,
+      tabItemList: [
+        .init(
+          tag: .zero,
+          tabItem: .init(
+            title: "User",
+            image: .init(systemName: "person.3.fill"),
+            tag: .zero),
+          linkItem: .init(path: RouteLink.Home.Path.user.rawValue),
+          prefersLargeTitles: true
+        ),
+      ]
+    )
+    .ignoresSafeArea()
   }
 }
