@@ -6,16 +6,30 @@ import PackageDescription
 let package = Package(
   name: "Architecture",
   products: [
-    // Products define the executables and libraries a package produces, making them visible to other packages.
     .library(
       name: "Architecture",
       targets: ["Architecture"]),
   ],
+  dependencies: [
+    .package(
+      url: "https://github.com/pointfreeco/swift-composable-architecture",
+      .upToNextMajor(from: "1.10.4")),
+    .package(
+      url: "https://github.com/kean/Pulse",
+      .upToNextMajor(from: "4.1.1")),
+    .package(
+      url: "https://github.com/kean/PulseLogHandler",
+      .upToNextMajor(from: "4.0.1")),
+  ],
   targets: [
-    // Targets are the basic building blocks of a package, defining a module or a test suite.
-    // Targets can depend on other targets in this package and products from dependencies.
     .target(
-      name: "Architecture"),
+      name: "Architecture",
+      dependencies: [
+        .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+        .product(name: "Pulse", package: "Pulse"),
+        .product(name: "PulseLogHandler", package: "PulseLogHandler"),
+      ]
+    ),
     .testTarget(
       name: "ArchitectureTests",
       dependencies: ["Architecture"]),
