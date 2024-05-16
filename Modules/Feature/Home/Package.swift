@@ -5,14 +5,24 @@ import PackageDescription
 
 let package = Package(
   name: "Home",
+  platforms: [
+    .iOS(.v17),
+  ],
   products: [
     .library(
       name: "Home",
       targets: ["Home"]),
   ],
+  dependencies: [
+    .package(path: "../../Core/Architecture"),
+  ],
   targets: [
     .target(
-      name: "Home"),
+      name: "Home",
+      dependencies: [
+        "Architecture",
+      ]
+    ),
     .testTarget(
       name: "HomeTests",
       dependencies: ["Home"]),
