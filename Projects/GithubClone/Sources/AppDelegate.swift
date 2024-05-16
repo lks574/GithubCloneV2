@@ -6,7 +6,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var navigator: TabLinkNavigator {
     .init(
-      routeBuilderItemList: AppRouteBuilderGroup().release,
+      routeBuilderItemList: AppGroup().release,
       dependency: AppSideEffect())
   }
 

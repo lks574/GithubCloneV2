@@ -15,12 +15,14 @@ let package = Package(
   ],
   dependencies: [
     .package(path: "../../Core/Architecture"),
+    .package(path: "../../Core/DesignSystem"),
   ],
   targets: [
     .target(
       name: "Home",
       dependencies: [
         "Architecture",
+        "DesignSystem",
       ]
     ),
     .testTarget(
