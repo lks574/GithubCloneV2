@@ -2,7 +2,7 @@ import ProjectDescription
 
 extension Settings {
   public static var defaultConfig: (Bool) -> Settings {
-    { isDev in
+    { _ in
       .settings(
         base: [
           "CODE_SIGN_IDENTITY": "iPhone Developer",

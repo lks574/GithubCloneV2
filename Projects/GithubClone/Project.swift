@@ -13,5 +13,4 @@ let project = Project.preview(
   ],
   dependencies: [
     .package(product: "Home", type: .runtime, condition: .none),
-  ]
-)
+  ])

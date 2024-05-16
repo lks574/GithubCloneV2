@@ -12,6 +12,5 @@ let project = Project.preview(
     .package(
       product: "CommonUI",
       type: .runtime,
-      condition: .none)
-  ]
-)
+      condition: .none),
+  ])
