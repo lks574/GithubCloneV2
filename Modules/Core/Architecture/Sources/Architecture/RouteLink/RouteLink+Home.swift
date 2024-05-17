@@ -6,6 +6,7 @@ extension RouteLink {
 
 extension RouteLink.Home {
   public enum Path: String, Equatable {
+    case logMonitor
     case user
   }
 }

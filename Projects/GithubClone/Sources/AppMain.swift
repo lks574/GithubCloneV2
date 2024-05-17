@@ -24,5 +24,10 @@ extension AppMain: View {
       ]
     )
     .ignoresSafeArea()
+    .onShake {
+      viewModel.linkNavigator.tabRootPartialNavigators.first?.sheet(
+        linkItem: .init(path: RouteLink.Home.Path.logMonitor.rawValue),
+        isAnimated: true)
+    }
   }
 }
