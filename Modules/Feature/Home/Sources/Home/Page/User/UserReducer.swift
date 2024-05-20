@@ -19,7 +19,7 @@ struct UserReducer {
 
   @ObservableState
   struct State: Equatable {
-
+    var itemList: [GithubEntity.Search.User.Item] = []
   }
 
   public enum Action: ViewAction, Sendable{
@@ -46,8 +46,16 @@ struct UserReducer {
       case .view(.onTabSearchUser(let keyword)):
         return sideEffect.searchUser(.init(query: keyword, page: .zero))
 
-      case .fetchSearchUser:
-        return .none
+      case .fetchSearchUser(let res):
+        switch res {
+        case .success(let user):
+          state.itemList = user.itemList
+          return .none
+        case .failure(let error):
+          print("aaaa", error)
+          return .none
+        }
+        
       }
     }
   }
