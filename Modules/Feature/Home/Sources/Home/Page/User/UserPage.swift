@@ -14,5 +14,8 @@ extension UserPage: View {
       Text("UserPage")
         .foregroundStyle(Color.blue)
     }
+    .onAppear {
+      send(.onTabSearchUser("lks574"))
+    }
   }
 }

@@ -1,6 +1,7 @@
 import Architecture
 import ComposableArchitecture
 import Foundation
+import Domain
 
 @Reducer
 struct UserReducer {
@@ -24,9 +25,12 @@ struct UserReducer {
   public enum Action: ViewAction, Sendable{
     case view(View)
 
+    case fetchSearchUser(Result<GithubEntity.Search.User.Response, Error>)
+
     public enum View: BindableAction, Sendable {
       case binding(BindingAction<State>)
       case onTabNext
+      case onTabSearchUser(String)
     }
   }
 
@@ -37,6 +41,12 @@ struct UserReducer {
         return .none
 
       case .view(.onTabNext):
+        return .none
+
+      case .view(.onTabSearchUser(let keyword)):
+        return sideEffect.searchUser(.init(query: keyword, page: .zero))
+
+      case .fetchSearchUser:
         return .none
       }
     }
