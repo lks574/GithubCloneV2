@@ -47,7 +47,7 @@ struct UserDetailReducer {
 
       case .view(.onLoad):
         return sideEffect
-          .user(.init(username: "lks574"))
+          .user(.init(username: state.username))
           .cancellable(pageID: pageID, id: CancelID.requestUser, cancelInFlight: true)
 
       case .view(.onTapURL(let url)):
@@ -72,6 +72,7 @@ struct UserDetailReducer {
 
   @ObservableState
   struct State: Equatable {
+    let username: String
     var userResponse: GithubEntity.Users.User.Response?
   }
 

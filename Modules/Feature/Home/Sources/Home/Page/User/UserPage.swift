@@ -50,7 +50,7 @@ extension UserPage {
     .frame(maxWidth: .infinity, alignment: .leading)
     .contentShape(Rectangle())
     .onTapGesture {
-      send(.onTapUser)
+      send(.onTapUser(user.loginName))
     }
   }
 }

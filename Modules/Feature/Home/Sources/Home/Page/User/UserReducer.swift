@@ -26,7 +26,7 @@ struct UserReducer {
     public enum View: BindableAction, Sendable {
       case binding(BindingAction<State>)
       case teardown
-      case onTapUser
+      case onTapUser(String)
     }
   }
 
@@ -53,8 +53,8 @@ struct UserReducer {
         return .concatenate(
           CancelID.allCases.map { .cancel(pageID: pageID, id: $0) })
 
-      case .view(.onTapUser):
-        sideEffect.routeToDetail()
+      case .view(.onTapUser(let username)):
+        sideEffect.routeToDetail(.init(username: username))
         return .none
 
       case .searchUser(let keyword):

@@ -21,7 +21,7 @@ extension GithubEntity.Users.User {
     public let avatarURL: String
     public let bio: String?
     public let blog: String
-    public let company: String
+    public let company: String?
     public let createdAt: String
     public let email: String?
     public let eventsURL: String
@@ -36,7 +36,7 @@ extension GithubEntity.Users.User {
     public let id: Int
     public let location: String?
     public let login: String
-    public let name: String
+    public let name: String?
     public let nodeID: String
     public let organizationsURL: String
     public let publicGists: Int

@@ -28,11 +28,12 @@ extension HomeGroup {
 
   static func userDetail() -> RouteBuilderOf<RootNavigator> {
     let matchPath = RouteLink.Home.Path.userDetail.rawValue
-    return .init(matchPath: matchPath) { navigator, _, _ in
-      DebugWrappingController(matchPath: matchPath) {
+    return .init(matchPath: matchPath) { navigator, items, _ in
+      guard let query: RouteLink.Home.QueryItem.UserDetail = items.decoded() else { return .none }
+      return DebugWrappingController(matchPath: matchPath) {
         UserDetailPage(
           store: .init(
-            initialState: UserDetailReducer.State(),
+            initialState: UserDetailReducer.State(username: query.username),
             reducer: {
               UserDetailReducer(sideEffect: .init(
                 navigator: navigator))

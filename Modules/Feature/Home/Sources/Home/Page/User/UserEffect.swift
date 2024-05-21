@@ -31,12 +31,12 @@ extension UserEffect {
 }
 
 extension UserEffect {
-  var routeToDetail: () -> Void {
-    {
+  var routeToDetail: (RouteLink.Home.QueryItem.UserDetail) -> Void {
+    { user in
       navigator.backOrNext(
         linkItem: .init(
           path: RouteLink.Home.Path.userDetail.rawValue,
-          items: .none),
+          items: user),
         isAnimated: true)
     }
   }

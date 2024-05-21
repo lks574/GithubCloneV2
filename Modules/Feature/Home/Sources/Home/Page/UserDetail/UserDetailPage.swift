@@ -29,7 +29,7 @@ extension UserDetailPage {
           Text(user.login)
             .font(.system(size: 16, weight: .bold))
             .foregroundStyle(.black)
-          Text(user.name)
+          Text(user.name ?? "")
             .font(.system(size: 14, weight: .regular))
             .foregroundStyle(.black)
         }
@@ -37,7 +37,7 @@ extension UserDetailPage {
 
       HStack(spacing: 8) {
         Image(systemName: "building")
-        Text(user.company)
+        Text(user.company ?? "")
           .font(.system(size: 14, weight: .regular))
           .foregroundStyle(.black)
       }
@@ -132,7 +132,7 @@ extension UserDetailPage: View {
   NavigationStack {
     UserDetailPage(
       store: .init(
-        initialState: UserDetailReducer.State(),
+        initialState: UserDetailReducer.State(username: "lks574"),
         reducer: {
           UserDetailReducer(
             sideEffect: .init(
