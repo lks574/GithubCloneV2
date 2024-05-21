@@ -3,6 +3,7 @@ import ComposableArchitecture
 import DesignSystem
 import SwiftUI
 import Domain
+import LinkNavigator
 
 @ViewAction(for: UserReducer.self)
 struct UserPage {
@@ -51,3 +52,15 @@ extension UserPage {
 }
 
 
+#Preview {
+  NavigationStack {
+    UserPage(store: .init(
+      initialState: UserReducer.State(),
+      reducer: {
+        UserReducer(sideEffect: .init(
+          navigator: TabLinkNavigatorMock())
+        )
+      })
+    )
+  }
+}

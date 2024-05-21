@@ -27,6 +27,9 @@ let package = Package(
         "Domain",
         .product(name: "AlamofireDynamic", package: "Alamofire"),
         .product(name: "Pulse", package: "Pulse"),
+      ],
+      resources: [
+        .copy("Resources/Mock/search_user.json"),
       ]
     ),
     .testTarget(
