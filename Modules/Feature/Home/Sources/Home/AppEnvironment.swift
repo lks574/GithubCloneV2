@@ -1,11 +1,15 @@
-import Platform
-import SwiftUI
 import ComposableArchitecture
 import Domain
+import Platform
+import SwiftUI
+
+// MARK: - AppEnvironment
 
 public struct AppEnvironment {
   public let githubSearchUseCase: GithubSearchUseCase
 }
+
+// MARK: TestDependencyKey
 
 extension AppEnvironment: TestDependencyKey {
   static public var previewValue: AppEnvironment = .init(
@@ -15,10 +19,11 @@ extension AppEnvironment: TestDependencyKey {
     githubSearchUseCase: GithubSearchUseCaseMock())
 }
 
+// MARK: DependencyKey
+
 extension AppEnvironment: DependencyKey {
   static public var liveValue: AppEnvironment = .init(
-    githubSearchUseCase: GithubSearchUseCasePlatform()
-  )
+    githubSearchUseCase: GithubSearchUseCasePlatform())
 }
 
 extension DependencyValues {

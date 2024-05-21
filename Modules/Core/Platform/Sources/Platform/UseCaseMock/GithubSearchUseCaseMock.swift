@@ -1,9 +1,13 @@
 import Domain
 import Foundation
 
+// MARK: - GithubSearchUseCaseMock
+
 public struct GithubSearchUseCaseMock {
   public init() { }
 }
+
+// MARK: GithubSearchUseCase
 
 extension GithubSearchUseCaseMock: GithubSearchUseCase {
   public var searchUser: @Sendable (GithubEntity.Search.User.Request) async throws -> GithubEntity.Search.User.Response {

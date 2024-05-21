@@ -1,14 +1,18 @@
 import Architecture
 import ComposableArchitecture
 import DesignSystem
-import SwiftUI
 import Domain
 import LinkNavigator
+import SwiftUI
+
+// MARK: - UserPage
 
 @ViewAction(for: UserReducer.self)
 struct UserPage {
   @Bindable var store: StoreOf<UserReducer>
 }
+
+// MARK: View
 
 extension UserPage: View {
   var body: some View {
@@ -51,16 +55,15 @@ extension UserPage {
   }
 }
 
-
 #Preview {
   NavigationStack {
-    UserPage(store: .init(
-      initialState: UserReducer.State(),
-      reducer: {
-        UserReducer(sideEffect: .init(
-          navigator: TabLinkNavigatorMock())
-        )
-      })
-    )
+    UserPage(
+      store: .init(
+        initialState: UserReducer.State(),
+        reducer: {
+          UserReducer(
+            sideEffect: .init(
+              navigator: TabLinkNavigatorMock()))
+        }))
   }
 }

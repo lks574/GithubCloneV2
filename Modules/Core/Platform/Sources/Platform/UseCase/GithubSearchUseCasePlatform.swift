@@ -1,7 +1,9 @@
-import Foundation
 import Alamofire
 import Domain
+import Foundation
 import Pulse
+
+// MARK: - GithubSearchUseCasePlatform
 
 public struct GithubSearchUseCasePlatform {
   let baseURL: String
@@ -13,6 +15,8 @@ public struct GithubSearchUseCasePlatform {
     URLSessionProxyDelegate.enableAutomaticRegistration()
   }
 }
+
+// MARK: GithubSearchUseCase
 
 extension GithubSearchUseCasePlatform: GithubSearchUseCase {
   public var searchUser: @Sendable (GithubEntity.Search.User.Request) async throws -> GithubEntity.Search.User.Response {

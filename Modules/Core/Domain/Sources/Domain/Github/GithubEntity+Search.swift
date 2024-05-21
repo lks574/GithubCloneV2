@@ -1,3 +1,5 @@
+// MARK: - GithubEntity.Search
+
 extension GithubEntity {
   public enum Search {
     public enum Repository { }
@@ -41,6 +43,8 @@ extension GithubEntity.Search.Repository {
 
   public struct Item: Equatable, Codable, Identifiable, Sendable {
 
+    // MARK: Public
+
     public let id: Int
     public let fullName: String
     public let name: String
@@ -52,6 +56,8 @@ extension GithubEntity.Search.Repository {
     public let lastUpdate: String
     public let owner: Owner
     public let htmlURL: String?
+
+    // MARK: Private
 
     private enum CodingKeys: String, CodingKey {
       case id
@@ -80,6 +86,8 @@ extension GithubEntity.Search.Repository {
     }
   }
 }
+
+// MARK: - GithubEntity.Search.Repository.Composite
 
 extension GithubEntity.Search.Repository {
   public struct Composite: Equatable, Sendable {
@@ -113,7 +121,7 @@ extension GithubEntity.Search.User {
     public var parameters: [String: Any] {
       [
         "q": query,
-        "page": page
+        "page": page,
       ]
     }
   }
@@ -145,6 +153,8 @@ extension GithubEntity.Search.User {
     }
   }
 }
+
+// MARK: - GithubEntity.Search.User.Composite
 
 extension GithubEntity.Search.User {
   public struct Composite: Equatable, Sendable {

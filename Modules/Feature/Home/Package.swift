@@ -23,8 +23,7 @@ let package = Package(
       dependencies: [
         "Architecture",
         "DesignSystem",
-      ]
-    ),
+      ]),
     .testTarget(
       name: "HomeTests",
       dependencies: ["Home"]),

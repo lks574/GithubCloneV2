@@ -1,10 +1,14 @@
-import SwiftUI
-import LinkNavigator
 import Architecture
+import LinkNavigator
+import SwiftUI
+
+// MARK: - AppMain
 
 struct AppMain {
   let viewModel: AppViewModel
 }
+
+// MARK: View
 
 extension AppMain: View {
   var body: some View {
@@ -19,15 +23,13 @@ extension AppMain: View {
             image: .init(systemName: "person.3.fill"),
             tag: .zero),
           linkItem: .init(path: RouteLink.Home.Path.user.rawValue),
-          prefersLargeTitles: true
-        ),
-      ]
-    )
-    .ignoresSafeArea()
-    .onShake {
-      viewModel.linkNavigator.tabRootPartialNavigators.first?.sheet(
-        linkItem: .init(path: RouteLink.Home.Path.logMonitor.rawValue),
-        isAnimated: true)
-    }
+          prefersLargeTitles: true),
+      ])
+      .ignoresSafeArea()
+      .onShake {
+        viewModel.linkNavigator.tabRootPartialNavigators.first?.sheet(
+          linkItem: .init(path: RouteLink.Home.Path.logMonitor.rawValue),
+          isAnimated: true)
+      }
   }
 }

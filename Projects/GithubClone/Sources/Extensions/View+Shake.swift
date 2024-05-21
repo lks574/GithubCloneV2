@@ -5,7 +5,6 @@ extension UIDevice {
   static let deviceDidShakeNotification = Notification.Name(rawValue: "deviceDidShakeNotification")
 }
 
-
 extension UIWindow {
   open override func motionEnded(_ motion: UIEvent.EventSubtype, with _: UIEvent?) {
     if motion == .motionShake {
@@ -13,6 +12,8 @@ extension UIWindow {
     }
   }
 }
+
+// MARK: - DeviceShakeViewModifier
 
 struct DeviceShakeViewModifier: ViewModifier {
   let action: () -> Void

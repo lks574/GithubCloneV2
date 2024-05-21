@@ -1,12 +1,12 @@
 import Architecture
 import ComposableArchitecture
-import Foundation
 import Domain
+import Foundation
 
 @Reducer
 struct UserDetailReducer {
-  private let pageID: String
-  private let sideEffect: UserDetailEffect
+
+  // MARK: Lifecycle
 
   init(
     pageID: String = UUID().uuidString,
@@ -16,10 +16,7 @@ struct UserDetailReducer {
     self.sideEffect = sideEffect
   }
 
-  @ObservableState
-  struct State: Equatable {
-
-  }
+  // MARK: Public
 
   public enum Action: ViewAction, Sendable {
     case view(View)
@@ -31,26 +28,35 @@ struct UserDetailReducer {
     }
   }
 
-  enum CancelID: Equatable, CaseIterable {
-    case teardown
-  }
-
   public var body: some ReducerOf<Self> {
     BindingReducer(action: \.view)
-    Reduce { state, action in
+    Reduce { _, action in
       switch action {
       case .view(.binding):
         return .none
 
       case .view(.teardown):
         return .concatenate(
-          CancelID.allCases.map { .cancel(pageID: pageID, id: $0) }
-        )
+          CancelID.allCases.map { .cancel(pageID: pageID, id: $0) })
 
       case .view(.onTapBack):
         return .none
-        
       }
     }
   }
+
+  // MARK: Internal
+
+  @ObservableState
+  struct State: Equatable { }
+
+  enum CancelID: Equatable, CaseIterable {
+    case teardown
+  }
+
+  // MARK: Private
+
+  private let pageID: String
+  private let sideEffect: UserDetailEffect
+
 }

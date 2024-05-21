@@ -1,7 +1,7 @@
 import Architecture
 import ComposableArchitecture
-import Foundation
 import Domain
+import Foundation
 
 struct UserDetailEffect {
   @Dependency(\.appEnvironment) var appEnvironment

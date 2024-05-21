@@ -5,6 +5,8 @@ import UIKit
 
 public final class DebugWrappingController<Content: View>: UIHostingController<Content>, MatchPathUsable {
 
+  // MARK: Lifecycle
+
   public init(
     matchPath: String,
     eventSubscriber: LinkNavigatorItemSubscriberProtocol? = .none,
@@ -23,6 +25,7 @@ public final class DebugWrappingController<Content: View>: UIHostingController<C
     Logger.trace("✂️ \(matchPath) deinit...")
   }
 
+  // MARK: Public
 
   public let matchPath: String
   public let eventSubscriber: LinkNavigatorItemSubscriberProtocol?

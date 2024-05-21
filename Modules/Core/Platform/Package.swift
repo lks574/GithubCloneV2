@@ -30,10 +30,8 @@ let package = Package(
       ],
       resources: [
         .copy("Resources/Mock/search_user.json"),
-      ]
-    ),
+      ]),
     .testTarget(
       name: "PlatformTests",
       dependencies: ["Platform"]),
-  ]
-)
+  ])

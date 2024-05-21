@@ -1,13 +1,12 @@
 import Architecture
 import ComposableArchitecture
-import Foundation
 import Domain
+import Foundation
 
 @Reducer
 struct UserReducer {
 
-  private let pageID: String
-  private let sideEffect: UserEffect
+  // MARK: Lifecycle
 
   init(
     pageID: String = UUID().uuidString,
@@ -17,13 +16,9 @@ struct UserReducer {
     self.sideEffect = sideEffect
   }
 
-  @ObservableState
-  struct State: Equatable {
-    var itemList: [GithubEntity.Search.User.Item] = []
-    var query = ""
-  }
+  // MARK: Public
 
-  public enum Action: ViewAction, Sendable{
+  public enum Action: ViewAction, Sendable {
     case view(View)
     case searchUser(String)
     case fetchSearchUser(Result<GithubEntity.Search.User.Response, Error>)
@@ -33,15 +28,6 @@ struct UserReducer {
       case teardown
       case onTapUser
     }
-  }
-
-  enum EventID: Hashable {
-    case throttle
-  }
-
-  enum CancelID: Equatable, CaseIterable {
-    case teardown
-    case searchUser
   }
 
   public var body: some ReducerOf<Self> {
@@ -59,6 +45,7 @@ struct UserReducer {
           for: 1.5,
           scheduler: DispatchQueue.main,
           latest: true)
+
       case .view(.binding):
         return .none
 
@@ -80,12 +67,35 @@ struct UserReducer {
         case .success(let user):
           state.itemList = user.itemList
           return .none
+
         case .failure(let error):
           print("aaaa", error)
           return .none
         }
-
       }
     }
   }
+
+  // MARK: Internal
+
+  @ObservableState
+  struct State: Equatable {
+    var itemList: [GithubEntity.Search.User.Item] = []
+    var query = ""
+  }
+
+  enum EventID: Hashable {
+    case throttle
+  }
+
+  enum CancelID: Equatable, CaseIterable {
+    case teardown
+    case searchUser
+  }
+
+  // MARK: Private
+
+  private let pageID: String
+  private let sideEffect: UserEffect
+
 }

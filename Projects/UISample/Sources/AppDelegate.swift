@@ -7,4 +7,3 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     true
   }
 }
-

@@ -1,6 +1,4 @@
-import LinkNavigator
 import Foundation
+import LinkNavigator
 
-struct AppSideEffect: DependencyType {
-
-}
+struct AppSideEffect: DependencyType { }

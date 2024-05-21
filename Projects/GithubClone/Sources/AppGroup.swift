@@ -1,6 +1,6 @@
 import Architecture
-import Home
 import Foundation
+import Home
 import LinkNavigator
 
 struct AppGroup<RootNavigator: RootNavigatorType> {

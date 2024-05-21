@@ -1,7 +1,9 @@
 import Pulse
 import PulseLogHandler
 
-fileprivate let logging = PersistentLogHandler(label: "com.sro.github-clone", store: .shared)
+private let logging = PersistentLogHandler(label: "com.sro.github-clone", store: .shared)
+
+// MARK: - Logger
 
 public struct Logger: Equatable {
 

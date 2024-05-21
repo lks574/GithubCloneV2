@@ -44,8 +44,7 @@ let package = Package(
         .product(name: "Pulse", package: "Pulse"),
         .product(name: "PulseLogHandler", package: "PulseLogHandler"),
         .product(name: "PulseUI", package: "Pulse"),
-      ]
-    ),
+      ]),
     .testTarget(
       name: "ArchitectureTests",
       dependencies: ["Architecture"]),
