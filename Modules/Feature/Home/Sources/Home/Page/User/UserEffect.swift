@@ -6,8 +6,8 @@ import Domain
 struct UserEffect {
   @Dependency(\.appEnvironment) var appEnvironment
 
-  let main: AnySchedulerOf<DispatchQueue>
-  let navigator: RootNavigatorType
+  private let main: AnySchedulerOf<DispatchQueue>
+  private let navigator: RootNavigatorType
 
   init(
     main: AnySchedulerOf<DispatchQueue> = .main,
@@ -28,3 +28,14 @@ extension UserEffect {
   }
 }
 
+extension UserEffect {
+  var routeToDetail: () -> Void {
+    {
+      navigator.backOrNext(
+        linkItem: .init(
+          path: RouteLink.Home.Path.userDetail.rawValue,
+          items: .none),
+        isAnimated: true)
+    }
+  }
+}

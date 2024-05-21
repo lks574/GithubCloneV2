@@ -6,6 +6,7 @@ public struct HomeGroup<RootNavigator: RootNavigatorType> {
     [
       logMonitor(),
       user(),
+      userDetail(),
     ]
   }
 }

@@ -25,4 +25,19 @@ extension HomeGroup {
       }
     }
   }
+
+  static func userDetail() -> RouteBuilderOf<RootNavigator> {
+    let matchPath = RouteLink.Home.Path.userDetail.rawValue
+    return .init(matchPath: matchPath) { navigator, _, _ in
+      DebugWrappingController(matchPath: matchPath) {
+        UserDetailPage(store: .init(
+          initialState: UserDetailReducer.State(),
+          reducer: {
+            UserDetailReducer(sideEffect: .init(
+              navigator: navigator))
+          })
+        )
+      }
+    }
+  }
 }
