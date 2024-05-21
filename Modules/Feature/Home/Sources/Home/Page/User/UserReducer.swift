@@ -31,11 +31,17 @@ struct UserReducer {
     public enum View: BindableAction, Sendable {
       case binding(BindingAction<State>)
       case onTabNext
+      case teardown
     }
   }
 
-  public enum EventID: Hashable {
+  enum EventID: Hashable {
     case throttle
+  }
+
+  enum CancelID: Equatable, CaseIterable {
+    case teardown
+    case searchUser
   }
 
   public var body: some ReducerOf<Self> {
@@ -43,7 +49,6 @@ struct UserReducer {
     Reduce { state, action in
       switch action {
       case .view(.binding(\.query)):
-        print("aaa state.query", state.query)
         guard !state.query.isEmpty else { return .none }
         state.itemList = []
         return .run { [query = state.query] in
@@ -60,9 +65,14 @@ struct UserReducer {
       case .view(.onTabNext):
         return .none
 
+      case .view(.teardown):
+        return .concatenate(
+          CancelID.allCases.map { .cancel(pageID: pageID, id: $0) })
+
       case .searchUser(let keyword):
-        print("aaa", keyword)
-        return sideEffect.searchUser(.init(query: keyword, page: .zero))
+        return sideEffect
+          .searchUser(.init(query: keyword, page: .zero))
+          .cancellable(pageID: pageID, id: CancelID.searchUser, cancelInFlight: true)
 
       case .fetchSearchUser(let res):
         switch res {
