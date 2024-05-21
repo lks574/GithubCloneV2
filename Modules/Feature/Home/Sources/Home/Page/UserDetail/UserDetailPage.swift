@@ -102,6 +102,8 @@ extension UserDetailPage {
       }
     }
     .frame(maxWidth: .infinity, alignment: .leading)
+    .background(Color.white)
+    .withShadow()
   }
 }
 
