@@ -19,9 +19,8 @@ extension UserPage: View {
       }
     }
     .navigationTitle("유저 찾기")
-    .onAppear {
-      send(.onTabSearchUser("ios"))
-    }
+    .scrollDismissesKeyboard(.immediately)
+    .searchable(text: $store.query, placement: .automatic, prompt: "검색")
   }
 }
 
