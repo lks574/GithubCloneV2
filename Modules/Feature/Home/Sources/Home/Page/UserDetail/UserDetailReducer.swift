@@ -27,6 +27,7 @@ struct UserDetailReducer {
       case teardown
       case onTapBack
       case onLoad
+      case onTapURL(String)
     }
   }
 
@@ -48,6 +49,10 @@ struct UserDetailReducer {
         return sideEffect
           .user(.init(username: "lks574"))
           .cancellable(pageID: pageID, id: CancelID.requestUser, cancelInFlight: true)
+
+      case .view(.onTapURL(let url)):
+        sideEffect.routeToURL(url)
+        return .none
 
       case .fetchUser(let res):
         switch res {

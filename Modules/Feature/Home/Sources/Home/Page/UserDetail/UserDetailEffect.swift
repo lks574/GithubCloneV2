@@ -1,4 +1,5 @@
 import Architecture
+import UIKit
 import ComposableArchitecture
 import Domain
 import Foundation
@@ -26,6 +27,18 @@ extension UserDetailEffect {
             try await appEnvironment.githubSearchUseCase.user(req)
           }))
         }
+    }
+  }
+}
+
+extension UserDetailEffect {
+  var routeToURL: (String) -> Void {
+    { url in
+      guard 
+        let url = URL(string: url),
+        UIApplication.shared.canOpenURL(url)
+      else { return }
+      UIApplication.shared.open(url, options: [:])
     }
   }
 }

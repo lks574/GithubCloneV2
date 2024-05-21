@@ -82,7 +82,7 @@ extension UserDetailPage {
         .frame(maxWidth: .infinity)
         .padding(.leading, 30)
 
-      Button(action: { }) {
+      Button(action: { send(.onTapURL(user.htmlURL)) }) {
         HStack(spacing: 8) {
           Image(systemName: "globe")
             .foregroundStyle(Color.black)
@@ -109,7 +109,7 @@ extension UserDetailPage {
 
 extension UserDetailPage: View {
   var body: some View {
-    VStack(spacing: 16) {
+    VStack(spacing: 24) {
       if let user = store.userResponse {
         userInfoView(user: user)
         menuView(user: user)
