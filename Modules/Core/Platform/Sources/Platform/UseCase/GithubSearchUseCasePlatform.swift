@@ -32,4 +32,18 @@ extension GithubSearchUseCasePlatform: GithubSearchUseCase {
       }
     }
   }
+
+  public var user: @Sendable (GithubEntity.Users.User.Request) async throws -> GithubEntity.Users.User.Response {
+    { req in
+      let res = await AF.request(baseURL + "/users/\(req.username)", method: .get)
+        .validate(statusCode: 200..<300)
+        .validate(contentType: ["application/json"])
+        .serializingDecodable(GithubEntity.Users.User.Response.self)
+        .response
+      switch res.result {
+      case .success(let response): return response
+      case .failure(let error): throw error
+      }
+    }
+  }
 }

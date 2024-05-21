@@ -20,17 +20,19 @@ struct UserDetailReducer {
 
   public enum Action: ViewAction, Sendable {
     case view(View)
+    case fetchUser(Result<GithubEntity.Users.User.Response, Error>)
 
     public enum View: BindableAction, Sendable {
       case binding(BindingAction<State>)
       case teardown
       case onTapBack
+      case onLoad
     }
   }
 
   public var body: some ReducerOf<Self> {
     BindingReducer(action: \.view)
-    Reduce { _, action in
+    Reduce { state, action in
       switch action {
       case .view(.binding):
         return .none
@@ -41,6 +43,22 @@ struct UserDetailReducer {
 
       case .view(.onTapBack):
         return .none
+
+      case .view(.onLoad):
+        return sideEffect
+          .user(.init(username: "lks574"))
+          .cancellable(pageID: pageID, id: CancelID.requestUser, cancelInFlight: true)
+
+      case .fetchUser(let res):
+        switch res {
+        case .success(let user):
+          state.userResponse = user
+          return .none
+
+        case .failure(let error):
+          print("aaaa", error)
+          return .none
+        }
       }
     }
   }
@@ -48,10 +66,13 @@ struct UserDetailReducer {
   // MARK: Internal
 
   @ObservableState
-  struct State: Equatable { }
+  struct State: Equatable {
+    var userResponse: GithubEntity.Users.User.Response?
+  }
 
   enum CancelID: Equatable, CaseIterable {
     case teardown
+    case requestUser
   }
 
   // MARK: Private

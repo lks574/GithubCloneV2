@@ -16,4 +16,11 @@ extension GithubSearchUseCaseMock: GithubSearchUseCase {
       return try! JSONDecoder().decode(GithubEntity.Search.User.Response.self, from: data)
     }
   }
+
+  public var user: @Sendable (GithubEntity.Users.User.Request) async throws -> GithubEntity.Users.User.Response {
+    { _ in
+      let data = try! Data(contentsOf: Files.userJson.url)
+      return try! JSONDecoder().decode(GithubEntity.Users.User.Response.self, from: data)
+    }
+  }
 }

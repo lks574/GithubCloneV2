@@ -3,6 +3,7 @@ import ComposableArchitecture
 import DesignSystem
 import Domain
 import SwiftUI
+import LinkNavigator
 
 // MARK: - UserDetailPage
 
@@ -17,11 +18,28 @@ extension UserDetailPage: View {
   var body: some View {
     VStack(spacing: .zero) {
       Text("UserDetailPage")
+      Text(store.userResponse?.company ?? "")
       Spacer()
     }
     .navigationBarTitleDisplayMode(.inline)
+    .onAppear {
+      send(.onLoad)
+    }
     .onDisappear {
       send(.teardown)
     }
+  }
+}
+
+#Preview {
+  NavigationStack {
+    UserDetailPage(
+      store: .init(
+        initialState: UserDetailReducer.State(),
+        reducer: {
+          UserDetailReducer(
+            sideEffect: .init(
+              navigator: TabLinkNavigatorMock()))
+        }))
   }
 }

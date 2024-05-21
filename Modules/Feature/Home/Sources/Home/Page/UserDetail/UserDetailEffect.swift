@@ -17,3 +17,15 @@ struct UserDetailEffect {
     self.navigator = navigator
   }
 }
+
+extension UserDetailEffect {
+  var user: (GithubEntity.Users.User.Request) -> Effect<UserDetailReducer.Action> {
+    { req in
+        .run { send in
+          await send(.fetchUser(Result {
+            try await appEnvironment.githubSearchUseCase.user(req)
+          }))
+        }
+    }
+  }
+}

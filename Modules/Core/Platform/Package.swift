@@ -30,6 +30,7 @@ let package = Package(
       ],
       resources: [
         .copy("Resources/Mock/search_user.json"),
+        .copy("Resources/Mock/user.json"),
       ]),
     .testTarget(
       name: "PlatformTests",
