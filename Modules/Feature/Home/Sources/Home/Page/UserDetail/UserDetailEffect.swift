@@ -41,4 +41,14 @@ extension UserDetailEffect {
       UIApplication.shared.open(url, options: [:])
     }
   }
+
+  var routeToRepos: (RouteLink.Home.QueryItem.Username) -> Void {
+    { user in
+      navigator.backOrNext(
+        linkItem: .init(
+          path: RouteLink.Home.Path.repos.rawValue,
+          items: user),
+        isAnimated: true)
+    }
+  }
 }

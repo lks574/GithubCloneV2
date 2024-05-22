@@ -29,13 +29,29 @@ extension HomeGroup {
   static func userDetail() -> RouteBuilderOf<RootNavigator> {
     let matchPath = RouteLink.Home.Path.userDetail.rawValue
     return .init(matchPath: matchPath) { navigator, items, _ in
-      guard let query: RouteLink.Home.QueryItem.UserDetail = items.decoded() else { return .none }
+      guard let query: RouteLink.Home.QueryItem.Username = items.decoded() else { return .none }
       return DebugWrappingController(matchPath: matchPath) {
         UserDetailPage(
           store: .init(
             initialState: UserDetailReducer.State(username: query.username),
             reducer: {
               UserDetailReducer(sideEffect: .init(
+                navigator: navigator))
+            }))
+      }
+    }
+  }
+
+  static func repos() -> RouteBuilderOf<RootNavigator> {
+    let matchPath = RouteLink.Home.Path.repos.rawValue
+    return .init(matchPath: matchPath) { navigator, items, _ in
+      guard let query: RouteLink.Home.QueryItem.Username = items.decoded() else { return .none }
+      return DebugWrappingController(matchPath: matchPath) {
+        ReposPage(
+          store: .init(
+            initialState: ReposReducer.State(username: query.username),
+            reducer: {
+              ReposReducer(sideEffect: .init(
                 navigator: navigator))
             }))
       }

@@ -31,7 +31,7 @@ extension UserEffect {
 }
 
 extension UserEffect {
-  var routeToDetail: (RouteLink.Home.QueryItem.UserDetail) -> Void {
+  var routeToDetail: (RouteLink.Home.QueryItem.Username) -> Void {
     { user in
       navigator.backOrNext(
         linkItem: .init(

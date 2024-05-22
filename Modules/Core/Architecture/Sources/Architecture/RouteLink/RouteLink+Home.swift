@@ -14,11 +14,12 @@ extension RouteLink.Home {
     case logMonitor
     case user
     case userDetail
+    case repos
   }
 }
 
 extension RouteLink.Home.QueryItem {
-  public struct UserDetail: Equatable, Codable {
+  public struct Username: Equatable, Codable {
     public let username: String
 
     public init(username: String) {

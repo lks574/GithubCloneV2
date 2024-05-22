@@ -10,6 +10,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface identifier_name
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Files {
+  /// repos.json
+  internal static let reposJson = File(name: "repos", ext: "json", relativePath: "", mimeType: "application/json")
   /// search_user.json
   internal static let searchUserJson = File(name: "search_user", ext: "json", relativePath: "", mimeType: "application/json")
   /// user.json

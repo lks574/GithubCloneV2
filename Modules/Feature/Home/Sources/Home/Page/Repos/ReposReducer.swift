@@ -4,13 +4,13 @@ import Domain
 import Foundation
 
 @Reducer
-struct UserDetailReducer {
+struct ReposReducer {
 
   // MARK: Lifecycle
 
   init(
     pageID: String = UUID().uuidString,
-    sideEffect: UserDetailEffect)
+    sideEffect: ReposEffect)
   {
     self.pageID = pageID
     self.sideEffect = sideEffect
@@ -20,15 +20,13 @@ struct UserDetailReducer {
 
   public enum Action: ViewAction, Sendable {
     case view(View)
-    case fetchUser(Result<GithubEntity.Users.User.Response, Error>)
+    case fetchRepos(Result<[GithubEntity.Users.Repos.Response], Error>)
 
     public enum View: BindableAction, Sendable {
       case binding(BindingAction<State>)
       case teardown
       case onTapBack
       case onLoad
-      case onTapURL(String)
-      case onTapRepos
     }
   }
 
@@ -44,25 +42,18 @@ struct UserDetailReducer {
           CancelID.allCases.map { .cancel(pageID: pageID, id: $0) })
 
       case .view(.onTapBack):
+        sideEffect.routeToBack()
         return .none
 
       case .view(.onLoad):
         return sideEffect
-          .user(.init(username: state.username))
-          .cancellable(pageID: pageID, id: CancelID.requestUser, cancelInFlight: true)
+          .repos(.init(username: state.username))
+          .cancellable(pageID: pageID, id: CancelID.requestRepos, cancelInFlight: true)
 
-      case .view(.onTapURL(let url)):
-        sideEffect.routeToURL(url)
-        return .none
-
-      case .view(.onTapRepos):
-        sideEffect.routeToRepos(.init(username: state.username))
-        return .none
-
-      case .fetchUser(let res):
+      case .fetchRepos(let res):
         switch res {
-        case .success(let user):
-          state.userResponse = user
+        case .success(let repos):
+          state.itemList = repos
           return .none
 
         case .failure(let error):
@@ -78,17 +69,21 @@ struct UserDetailReducer {
   @ObservableState
   struct State: Equatable {
     let username: String
-    var userResponse: GithubEntity.Users.User.Response?
+    var itemList: [GithubEntity.Users.Repos.Response] = []
+  }
+
+  enum EventID: Hashable {
+    case throttle
   }
 
   enum CancelID: Equatable, CaseIterable {
     case teardown
-    case requestUser
+    case requestRepos
   }
 
   // MARK: Private
 
   private let pageID: String
-  private let sideEffect: UserDetailEffect
+  private let sideEffect: ReposEffect
 
 }

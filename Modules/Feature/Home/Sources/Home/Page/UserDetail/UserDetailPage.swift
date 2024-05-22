@@ -57,7 +57,7 @@ extension UserDetailPage {
   @ViewBuilder
   private func menuView(user: GithubEntity.Users.User.Response) -> some View {
     VStack(alignment: .leading, spacing: .zero) {
-      Button(action: { }) {
+      Button(action: { send(.onTapRepos) }) {
         HStack(spacing: 8) {
           Image(systemName: "text.book.closed")
             .foregroundStyle(Color.black)
