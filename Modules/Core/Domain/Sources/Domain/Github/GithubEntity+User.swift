@@ -1,3 +1,5 @@
+// MARK: - GithubEntity.Users
+
 extension GithubEntity {
   public enum Users {
     public enum User { }
@@ -19,6 +21,41 @@ extension GithubEntity.Users.User {
   }
 
   public struct Response: Equatable, Codable, Sendable {
+    public enum CodingKeys: String, CodingKey {
+      case avatarURL = "avatar_url"
+      case bio
+      case blog
+      case company
+      case createdAt = "created_at"
+      case email
+      case eventsURL = "events_url"
+      case followers
+      case followersURL = "followers_url"
+      case following
+      case followingURL = "following_url"
+      case gistsURL = "gists_url"
+      case gravatarID = "gravatar_id"
+      case hireable
+      case htmlURL = "html_url"
+      case id
+      case location
+      case login
+      case name
+      case nodeID = "node_id"
+      case organizationsURL = "organizations_url"
+      case publicGists = "public_gists"
+      case publicRepos = "public_repos"
+      case receivedEventsURL = "received_events_url"
+      case reposURL = "repos_url"
+      case siteAdmin = "site_admin"
+      case starredURL = "starred_url"
+      case subscriptionsURL = "subscriptions_url"
+      case twitterUsername = "twitter_username"
+      case type
+      case updatedAt = "updated_at"
+      case url
+    }
+
     public let avatarURL: String
     public let bio: String?
     public let blog: String
@@ -52,41 +89,6 @@ extension GithubEntity.Users.User {
     public let updatedAt: String
     public let url: String
 
-    public enum CodingKeys: String, CodingKey {
-      case avatarURL = "avatar_url"
-      case bio = "bio"
-      case blog = "blog"
-      case company = "company"
-      case createdAt = "created_at"
-      case email = "email"
-      case eventsURL = "events_url"
-      case followers = "followers"
-      case followersURL = "followers_url"
-      case following = "following"
-      case followingURL = "following_url"
-      case gistsURL = "gists_url"
-      case gravatarID = "gravatar_id"
-      case hireable = "hireable"
-      case htmlURL = "html_url"
-      case id = "id"
-      case location = "location"
-      case login = "login"
-      case name = "name"
-      case nodeID = "node_id"
-      case organizationsURL = "organizations_url"
-      case publicGists = "public_gists"
-      case publicRepos = "public_repos"
-      case receivedEventsURL = "received_events_url"
-      case reposURL = "repos_url"
-      case siteAdmin = "site_admin"
-      case starredURL = "starred_url"
-      case subscriptionsURL = "subscriptions_url"
-      case twitterUsername = "twitter_username"
-      case type = "type"
-      case updatedAt = "updated_at"
-      case url = "url"
-    }
-
   }
 }
 
@@ -104,52 +106,6 @@ extension GithubEntity.Users.Repos {
   }
 
   public struct Response: Equatable, Codable, Identifiable, Sendable {
-    public let id: Int
-    public let nodeID, name, fullName: String
-    public let repoPrivate: Bool
-    public let owner: Owner
-    public let htmlURL: String
-    public let description: String?
-    public let fork: Bool
-    public let url, forksURL: String
-    public let keysURL, collaboratorsURL: String
-    public let teamsURL, hooksURL: String
-    public let issueEventsURL: String
-    public let eventsURL: String
-    public let assigneesURL, branchesURL: String
-    public let tagsURL: String
-    public let blobsURL, gitTagsURL, gitRefsURL, treesURL: String
-    public let statusesURL: String
-    public let languagesURL, stargazersURL, contributorsURL, subscribersURL: String
-    public let subscriptionURL: String
-    public let commitsURL, gitCommitsURL, commentsURL, issueCommentURL: String
-    public let contentsURL, compareURL: String
-    public let mergesURL: String
-    public let archiveURL: String
-    public let downloadsURL: String
-    public let issuesURL, pullsURL, milestonesURL, notificationsURL: String
-    public let labelsURL, releasesURL: String
-    public let deploymentsURL: String
-    public let createdAt, updatedAt, pushedAt: String
-    public let gitURL, sshURL: String
-    public let cloneURL: String
-    public let svnURL: String
-    public let homepage: String?
-    public let size, stargazersCount, watchersCount: Int
-    public let language: String?
-    public let hasIssues, hasProjects, hasDownloads, hasWiki: Bool
-    public let hasPages, hasDiscussions: Bool
-    public let forksCount: Int
-    public let mirrorURL: String?
-    public let archived, disabled: Bool
-    public let openIssuesCount: Int
-    public let license: License?
-    public let allowForking, isTemplate, webCommitSignoffRequired: Bool
-    public let topics: [String?]
-    public let visibility: String
-    public let forks, openIssues, watchers: Int
-    public let defaultBranch: String
-
     public enum CodingKeys: String, CodingKey {
       case id
       case nodeID = "node_id"
@@ -227,19 +183,6 @@ extension GithubEntity.Users.Repos {
     }
 
     public struct Owner: Equatable, Codable, Sendable {
-      public let login: String
-      public let id: Int
-      public let nodeID: String
-      public let avatarURL: String
-      public let gravatarID: String
-      public let url, htmlURL, followersURL: String
-      public let followingURL, gistsURL, starredURL: String
-      public let subscriptionsURL, organizationsURL, reposURL: String
-      public let eventsURL: String
-      public let receivedEventsURL: String
-      public let type: String
-      public let siteAdmin: Bool
-
       public enum CodingKeys: String, CodingKey {
         case login, id
         case nodeID = "node_id"
@@ -259,6 +202,20 @@ extension GithubEntity.Users.Repos {
         case type
         case siteAdmin = "site_admin"
       }
+
+      public let login: String
+      public let id: Int
+      public let nodeID: String
+      public let avatarURL: String
+      public let gravatarID: String
+      public let url, htmlURL, followersURL: String
+      public let followingURL, gistsURL, starredURL: String
+      public let subscriptionsURL, organizationsURL, reposURL: String
+      public let eventsURL: String
+      public let receivedEventsURL: String
+      public let type: String
+      public let siteAdmin: Bool
+
     }
 
     public struct License: Equatable, Codable, Sendable {
@@ -276,5 +233,52 @@ extension GithubEntity.Users.Repos {
         case url
       }
     }
+
+    public let id: Int
+    public let nodeID, name, fullName: String
+    public let repoPrivate: Bool
+    public let owner: Owner
+    public let htmlURL: String
+    public let description: String?
+    public let fork: Bool
+    public let url, forksURL: String
+    public let keysURL, collaboratorsURL: String
+    public let teamsURL, hooksURL: String
+    public let issueEventsURL: String
+    public let eventsURL: String
+    public let assigneesURL, branchesURL: String
+    public let tagsURL: String
+    public let blobsURL, gitTagsURL, gitRefsURL, treesURL: String
+    public let statusesURL: String
+    public let languagesURL, stargazersURL, contributorsURL, subscribersURL: String
+    public let subscriptionURL: String
+    public let commitsURL, gitCommitsURL, commentsURL, issueCommentURL: String
+    public let contentsURL, compareURL: String
+    public let mergesURL: String
+    public let archiveURL: String
+    public let downloadsURL: String
+    public let issuesURL, pullsURL, milestonesURL, notificationsURL: String
+    public let labelsURL, releasesURL: String
+    public let deploymentsURL: String
+    public let createdAt, updatedAt, pushedAt: String
+    public let gitURL, sshURL: String
+    public let cloneURL: String
+    public let svnURL: String
+    public let homepage: String?
+    public let size, stargazersCount, watchersCount: Int
+    public let language: String?
+    public let hasIssues, hasProjects, hasDownloads, hasWiki: Bool
+    public let hasPages, hasDiscussions: Bool
+    public let forksCount: Int
+    public let mirrorURL: String?
+    public let archived, disabled: Bool
+    public let openIssuesCount: Int
+    public let license: License?
+    public let allowForking, isTemplate, webCommitSignoffRequired: Bool
+    public let topics: [String?]
+    public let visibility: String
+    public let forks, openIssues, watchers: Int
+    public let defaultBranch: String
+
   }
 }

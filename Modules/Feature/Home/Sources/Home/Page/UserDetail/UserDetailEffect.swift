@@ -1,8 +1,10 @@
 import Architecture
-import UIKit
 import ComposableArchitecture
 import Domain
 import Foundation
+import UIKit
+
+// MARK: - UserDetailEffect
 
 struct UserDetailEffect {
   @Dependency(\.appEnvironment) var appEnvironment
@@ -22,11 +24,11 @@ struct UserDetailEffect {
 extension UserDetailEffect {
   var user: (GithubEntity.Users.User.Request) -> Effect<UserDetailReducer.Action> {
     { req in
-        .run { send in
-          await send(.fetchUser(Result {
-            try await appEnvironment.githubSearchUseCase.user(req)
-          }))
-        }
+      .run { send in
+        await send(.fetchUser(Result {
+          try await appEnvironment.githubSearchUseCase.user(req)
+        }))
+      }
     }
   }
 }

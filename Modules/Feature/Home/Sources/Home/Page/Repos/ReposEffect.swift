@@ -3,7 +3,7 @@ import ComposableArchitecture
 import Domain
 import Foundation
 
-// MARK: - UserEffect
+// MARK: - ReposEffect
 
 struct ReposEffect {
   @Dependency(\.appEnvironment) var appEnvironment

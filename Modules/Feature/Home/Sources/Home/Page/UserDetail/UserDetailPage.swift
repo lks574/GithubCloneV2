@@ -2,8 +2,8 @@ import Architecture
 import ComposableArchitecture
 import DesignSystem
 import Domain
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 // MARK: - UserDetailPage
 
@@ -106,6 +106,8 @@ extension UserDetailPage {
     .withShadow()
   }
 }
+
+// MARK: View
 
 extension UserDetailPage: View {
   var body: some View {

@@ -1,6 +1,8 @@
 import Foundation
 import SwiftUI
 
+// MARK: - WithShadow
+
 public struct WithShadow: ViewModifier {
 
   public init(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat) {

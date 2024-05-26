@@ -9,7 +9,7 @@ extension RouteLink {
 // MARK: - RouteLink.Home.Path
 
 extension RouteLink.Home {
-  public enum QueryItem {}
+  public enum QueryItem { }
   public enum Path: String, Equatable {
     case logMonitor
     case user
@@ -17,6 +17,8 @@ extension RouteLink.Home {
     case repos
   }
 }
+
+// MARK: - RouteLink.Home.QueryItem.Username
 
 extension RouteLink.Home.QueryItem {
   public struct Username: Equatable, Codable {

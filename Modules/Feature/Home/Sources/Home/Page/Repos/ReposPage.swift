@@ -5,12 +5,14 @@ import Domain
 import LinkNavigator
 import SwiftUI
 
-// MARK: - UserPage
+// MARK: - ReposPage
 
 @ViewAction(for: ReposReducer.self)
 struct ReposPage {
   @Bindable var store: StoreOf<ReposReducer>
 }
+
+// MARK: View
 
 extension ReposPage: View {
   var body: some View {
